@@ -1,0 +1,66 @@
+<div fxLayout="column" (click)="openCardDetails(card)" class="card" [ngClass]="{ 'collapsed-card' : card.collapsed }">
+
+    <div fxLayout="row" class="tag-div-height">
+        <!-- TAG COLOR COLUMN -->
+        <div fxLayout="column" >
+            <ng-container *ngFor="let tag of card.tags">
+                <div fxLayout="row" matTooltip="{{ tag.text }}" class="left-side-tag pointer" [ngStyle]="{'background-color': getTagColor(tag),
+                                                                  'border-top-left-radius': getTopRadius(tag),
+                                                                  'border-bottom-left-radius': getBottomRadius(tag)}">
+                </div>
+            </ng-container>
+        </div>
+        <!-- TAG COLOR COLUMN -->
+
+        <!-- CONTENT COLUMN -->
+        <div fxLayout="column" class="pl-4 pb-12" 
+             [ngClass]="{ 'column-content-no-tags-padding' : card.tags.length === 0 }">
+
+            <!-- CARD HEADER -->
+            <div fxLayout="row">
+
+                <!-- PHOTO -->
+                <div fxFlex="16px" fxLayout="row" class="avatar-padding">
+                    <ngx-avatar size=16 name="{{ card?.title }}"></ngx-avatar>
+                </div>
+                <!-- PHOTO -->
+
+                <!-- PATIENT NAME -->
+                <div fxFlex="174px" fxLayout="row" class="patient-name-padding Caption-01-Left-Black">
+                    <label *highlightMatch="{ textForMatch: searchText, inputText: card.title, class: 'highlight-text'}"></label>
+                </div>
+                <!-- PATIENT NAME -->
+
+                <!-- COLLAPSE ICON -->
+                <div fxFlex fxLayout="row" class="arrow-padding">
+                    <mat-icon *ngIf="!card.collapsed" svgIcon="arrow-up"
+                        (click)="collapseCard(card);$event.stopPropagation()" class="arrow-size pointer"></mat-icon>
+                    <mat-icon *ngIf="card.collapsed" svgIcon="arrow-down"
+                        (click)="expandCard(card);$event.stopPropagation()" class="arrow-size pointer"></mat-icon>
+                </div>
+                <!-- COLLAPSE ICON -->
+            </div>
+            <!-- CARD HEADER -->
+
+            <!-- TURN NUMBER -->
+            <div fxLayout="row" class="card-info-padding">
+                <span class="Small-01-Left-Grey">{{ card?.turn }}</span>
+            </div>
+            <!-- TURN NUMBER -->
+
+            <!-- EXPANDED INFO -->
+            <div *ngIf="!card.collapsed">
+                <!-- DATE CREATED -->
+                <div fxLayout="row" fxLayoutAlign="start center">
+                    <mat-icon svgIcon="time" class="time-icon"></mat-icon>
+                    <span class="Caption-01-Left-Black time-span-padding">{{ getFormattedDate(card?.created) }}</span>
+                </div>
+                <!-- DATE CREATED -->
+            </div>
+            <!-- EXPANDED INFO -->
+
+        </div>
+        <!-- CONTENT COLUMN -->
+    </div>
+
+</div>

@@ -1,0 +1,52 @@
+board-configuration-header {
+
+    mat-icon.add-icon {
+        line-height: 0.85 !important;
+        margin-right: 8px;
+
+        svg {
+            width: 14px;
+            height: 14px;
+    
+            path[fill] {
+                fill: var(--azure);
+            }
+        }
+    }
+
+    .slider{
+        padding-top: 10px;
+        height: 40px;
+    }
+
+    .menu-header-btn {
+        min-width: 40px !important;
+        max-width: 40px !important;
+
+        mat-icon.menu-icon {
+            min-width: 4px !important;
+            max-width: 4px !important;
+
+            svg {
+                width: 4px;
+        
+                path[fill] {
+                    fill: var(--black);
+                }
+            }
+        }
+    }
+
+    .mat-chip.mat-standard-chip {
+        margin-right: 12px;
+        width: 102px;
+    }
+    
+    .truncate {
+        flex: 1;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }    
+}
+

@@ -1,0 +1,69 @@
+<div fxLayout="column" class="columns-configuration-card" [style.height]="!isEdit ? '151px' : '272px'">
+
+    <!-- CARD HEADER -->
+    <div fxLayout="row" class="header-padding">
+
+        <!-- ACTIONS BUTTONS -->
+        <div fxFlex fxLayout="row" class="actions-buttons-padding">
+            <div [ngClass]="{'column-drag-handle': !editIndex}" fxFlex="160px" fxLayout="column">
+                <mat-icon svgIcon="drag" class="edit" class="drag-icon pointer"></mat-icon>
+            </div>
+            <div *ngIf="!isEdit" (click)="edit()" fxLayout="column">
+                <mat-icon svgIcon="edit" class="edit" class="edit-icon pointer"></mat-icon>
+            </div>
+            <div fxLayout="column" (click)="delete()" [ngStyle]="{'margin-left': isEdit ? '35px' : ''}">
+                <mat-icon svgIcon="delete" class="edit" class="delete-icon pointer"></mat-icon>
+            </div>
+        </div>
+        <!-- ACTIONS BUTTONS -->
+    </div>
+    <!-- CARD HADER -->
+
+    <div *ngIf="!isEdit" class="body-padding ">
+
+        <!-- CARD CONTENT -->
+        <div fxLayout="column" class="column-text">
+            <div fxFlex="20px" fxLayout="row">
+                <div class="Subheading-1-01-Left-Black">{{data.name}}</div>
+            </div>
+            <div fxLayout="row">
+                <div class="Caption-01-Left-Grey">{{data.description}}</div>
+            </div>
+        </div>
+
+        <!-- CARD CONTENT -->
+    </div>
+
+    <div *ngIf="isEdit" class="body-padding body-bottom-padding">
+
+        <!-- CARD CONTENT -->
+
+        <div fxLayout="column">
+            <form fxLayout="column" [formGroup]="addColumn">
+                <mat-form-field color="accent" fxFlex="70px" appearance="outline">
+                    <mat-label>{{'TITLE' | translate}}</mat-label>
+                    <input #name formControlName="name" matInput placeholder="{{'TITLE' | translate }}"
+                        required>
+                </mat-form-field>
+
+                <mat-form-field color="accent" fxFlex="90px" appearance="outline">
+                    <mat-label>{{'DESCRIPTION' | translate}}</mat-label>
+                    <textarea #description formControlName="description" matInput class="textarea"
+                    placeholder="{{'DESCRIPTION' | translate }}"></textarea>
+                </mat-form-field>
+
+                <div fxLayout="row" fxLayoutAlign="start baseline" id="action-buttons"  >
+                    <button (click)="cancel()" type="submit" class="btn" id="clear-btn" mat-raised-button color="primary">
+                        <span class="Body-01-Left-Blue">{{'CANCEL' | translate }}</span>
+                    </button>
+                    <button (click)="save()" type="submit" class="btn-save" id="add-btn" mat-raised-button color="accent">
+                        <span class="Body-01-Left-White">{{'SAVE' | translate }}</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+        <!-- CARD CONTENT -->
+    </div>
+
+    
+</div>

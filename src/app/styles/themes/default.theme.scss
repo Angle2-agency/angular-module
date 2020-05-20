@@ -1,0 +1,271 @@
+@mixin default-theme($theme) {
+    
+    // retrieve variables from theme 
+    $accent: map-get($theme, accent);
+    $foreground: map-get($theme, foreground);
+
+    $dtazure: map-get($theme, devfeteam-azure);
+    $dtwhite: map-get($theme, devfeteam-white);
+    $dtred-orange: map-get($theme, devfeteam-red-orange);
+    $dtdark-grey-70: map-get($theme, devfeteam-dark-grey-70);
+    $dtlipstick: map-get($theme, devfeteam-lipstick);
+    $dtcloudy-blue: map-get($theme, devfeteam-cloudy-blue);
+    $dtdark-grey: map-get($theme, devfeteam-dark-grey);
+    $dtpale-lilac: map-get($theme, devfeteam-pale-lilac);
+    $dtblue-grey: map-get($theme, devfeteam-blue-grey);
+    $dtpale-purple: map-get($theme, devfeteam-pale-purple);
+    $dtvery-light-blue: map-get($theme, devfeteam-very-light-blue);
+    $dtvery-light-grey: map-get($theme, devfeteam-very-light-grey);
+    $dtpale-grey: map-get($theme, devfeteam-pale-grey);
+    $dtdark-mint-green: map-get($theme, devfeteam-dark-mint-green);
+    $dtvery-light-pink: map-get($theme, devfeteam-very-light-pink);
+    $dtblush: map-get($theme, devfeteam-blush);
+    $dtmango: map-get($theme, devfeteam-mango);
+    
+    $dtblack: map-get($theme, devfeteam-black);
+    $dtgrey: map-get($theme, devfeteam-grey);
+    $dtred-grey: map-get($theme, devfeteam-red-grey);
+
+    // css variables
+    & {
+        --lipstick: #{$dtlipstick};
+        --cloudy-blue: #{$dtcloudy-blue};
+        --dark-grey: #{$dtdark-grey};
+        --pale-lilac: #{$dtpale-lilac};
+        --azure: #{$dtazure};
+        --blue-grey: #{$dtblue-grey};
+        --pale-purple: #{$dtpale-purple};
+        --very-light-blue: #{$dtvery-light-blue};
+        --white: #{$dtwhite};
+        --very-light-grey: #{$dtvery-light-grey};
+        --pale-grey: #{$dtpale-grey};
+        --dark-mint-green: #{$dtdark-mint-green};
+        --red-orange: #{$dtred-orange};
+        --blush: #{$dtblush};
+        --very-light-pink: #{$dtvery-light-pink};
+        --dark-grey-70: rgba(#{$dtdark-grey}, 0.7);
+        --mango: #{$dtmango};
+    }
+
+    .pointer {
+        cursor: pointer !important;
+    }
+
+    /* MAT FORM FIELD */
+    mat-form-field {
+        color: $dtcloudy-blue;
+        font-size: 14px;
+    }
+
+    .mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick {
+        color: $dtdark-grey;
+    }
+
+    .mat-input-element {
+        color: map-get($foreground, text) !important;
+        font-size: 14px !important;
+    }
+
+    .mat-form-field-appearance-outline .mat-form-field-infix {
+        padding: 11px 0 11px 0 !important;  // make input fields 48px high
+    }
+
+    .mat-form-field-label-wrapper {
+        top: -1.1em !important; // cetralize label vertically in field
+    }
+
+    .mat-form-field-appearance-outline .mat-form-field-outline-thick .mat-form-field-outline-end, .mat-form-field-appearance-outline .mat-form-field-outline-thick .mat-form-field-outline-gap, .mat-form-field-appearance-outline .mat-form-field-outline-thick .mat-form-field-outline-start {
+        border-width: 1px !important;
+    }
+
+    /** MAT OPTION **/
+    .mat-primary .mat-option.mat-selected {
+        color: $dtdark-grey !important;
+    }
+
+    /** MAT CHIP **/
+    .mat-chip {
+        font-size: 12px !important;
+    }
+
+    .mat-chip.mat-standard-chip {
+        background: var(--white) !important;
+        color: var(--dark-grey) !important;
+        height: 28px;
+        box-shadow: 0 1px 4px 0 rgba(0, 25, 94, 0.2);
+
+        mat-icon {
+            width: 7px;
+        }
+        
+        svg {
+            height: 7px;
+            width: 7px;
+            margin-bottom: 2px;
+        }
+    }
+	
+    .mat-chip-remove {
+        opacity: 1 !important;
+    }
+
+    /** MAT BUTTON **/
+    button {
+        font-weight: normal;
+    }
+
+    .mat-raised-button, .mat-stroked-button, .mat-button {
+        height: 40px;
+    }
+
+    .mat-stroked-button:not([disabled]) {
+        border-color: mat-color($accent, 500) !important;
+    }
+
+    .mat-raised-button:not([disabled]), .mat-fab:not([disabled]), .mat-mini-fab:not([disabled]) {
+        box-shadow: 0 1px 4px 0 rgba(0, 25, 94, 0.2);
+    }
+	
+
+    button:disabled, button[disabled], button:disabled span, button[disabled] span {
+        color: $dtpale-purple !important;
+    }
+	
+	.mat-mini-fab {
+        height: 32px !important;
+        width: 32px !important;
+    }
+
+    /** MENU PANELS **/
+    .cdk-overlay-container .mat-menu-panel {
+        box-shadow: 0 4px 8px 0 rgba(0, 25, 94, 0.1) !important;
+    }
+
+    .cdk-overlay-container .mat-select-panel {
+        box-shadow: 0 4px 8px 0 rgba(0, 25, 94, 0.1) !important;
+    }
+
+    .mat-menu-content:not(:empty) {
+        padding-top: unset;
+        padding-bottom: unset;
+    }
+
+    /** AUTOCOMPLETE **/
+    .mat-autocomplete-panel {
+        box-shadow: 0 4px 8px 0 rgba(0, 25, 94, 0.1) !important;
+    }
+
+    // This removes the default mat-menu nested arrow icon
+	.mat-menu-item-submenu-trigger {
+		padding-right: 0px !important;
+	}
+	 
+	.mat-menu-item .mat-icon {
+		margin-right: 0px !important; 
+	}
+	 
+	.mat-menu-item-submenu-trigger::after { 
+		display: none !important;
+	}
+
+    /** MAT CALENDAR **/
+    .mat-calendar-body-today {
+        background-color: var(--dark-mint-green) !important;
+        color: var(--white);
+        border: none;
+    }
+    
+    /** QUILL RICH TEXT EDITOR **/
+	quill-editor {
+		caret-color: var(--azure);
+		
+        .ql-toolbar {
+            height: 48px;
+            padding: 12px 16px;
+            background-color: var(--very-light-grey) !important;
+            border-top-left-radius: 4px;
+            border-top-right-radius: 4px;
+			
+			&.focused {
+                border-color: var(--azure);
+                border-bottom-color: #ccc !important;
+            }
+        }
+ 
+        .ql-snow.ql-toolbar button {
+            padding: 2px;
+        }
+        
+        .ql-container {
+            border-bottom-left-radius: 4px;
+            border-bottom-right-radius: 4px;
+        }
+		
+		&:focus-within {
+            .ql-container {
+                border-color: var(--azure);
+            }
+
+            .ql-toolbar {
+                border-color: var(--azure);
+                border-bottom-color: #ccc !important;
+            }
+        }
+    }
+
+    /** MAT CHECKBOX **/
+    .mat-checkbox {
+        .mat-checkbox-frame {
+            border-color: var(--pale-lilac);
+
+            .mat-checkbox-inner-container{
+                margin-right: 8px;
+                margin-left: 8px;
+            }
+        }
+    }
+
+    /** MAT RADIO BUTTON **/
+    .mat-radio-button {
+        .mat-radio-outer-circle {
+            border-style: solid;
+            border-width: 2px;
+            border-color: var(--pale-lilac);
+        }
+    }
+    
+    /** MAT TOGGLE **/
+	.mat-slide-toggle {
+        .mat-slide-toggle-bar {
+            width: 32px; 
+            height: 16px;
+            background-color: var(--very-light-blue);
+        }
+
+        &.mat-checked:not(.mat-disabled) {
+            .mat-slide-toggle-bar {
+                background-color: var(--azure);
+            }
+        }
+
+        .mat-slide-toggle-thumb {
+            width: 16px;
+            height: 16px;
+            background-color: var(--white) !important;
+        }
+
+        .mat-slide-toggle-thumb-container {
+            top: 0 !important;
+
+            .mat-slide-toggle-ripple {
+                width: 35px;
+                height: 35px;
+            }
+        }
+    }
+	    
+    /** MAT TOOLTIP **/
+    .mat-tooltip {
+        font-size: 12px;
+    }
+}

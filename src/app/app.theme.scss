@@ -1,0 +1,123 @@
+// -----------------------------------------------------------------------------------------------------
+// @ Typography
+// -----------------------------------------------------------------------------------------------------
+
+// Force the input field font sizes to 16px
+$typography: mat-typography-config(
+    $font-family: 'Rubik, sans-serif',
+    $title: mat-typography-level(20px, 32px, 600),
+    $body-2: mat-typography-level(14px, 24px, 600),
+    $button: mat-typography-level(14px, 14px, 600),
+    $input: mat-typography-level(16px, 1.125, 400) // line-height must be unitless !!!
+);
+
+// Setup the typography
+@include angular-material-typography($typography);
+
+// -----------------------------------------------------------------------------------------------------
+// @ Mixin's
+// -----------------------------------------------------------------------------------------------------
+
+// Import app and page component themes here to enable theming for them
+@import "src/app/styles/themes/default.theme";
+
+// Define a mixin for easier access
+@mixin components-theme($theme) {
+    
+    // devfeteam components
+    @include default-theme($theme);
+}
+
+// -----------------------------------------------------------------------------------------------------
+// @ Colors
+// -----------------------------------------------------------------------------------------------------
+
+// Import devfeteam color definitions for the new theme
+@import "src/app/styles/dtcolors";
+
+// Define app colors
+$devfeteam-custom-colors: (
+    devfeteam-azure: mat-color($dtazure, 500),
+    devfeteam-white: mat-color($dtwhite, 500),
+    devfeteam-red-orange: mat-color($dtred-orange, 500),
+    devfeteam-dark-grey-70: rgba(mat-color($dtdark-grey, 500), 0.7),
+    devfeteam-lipstick: mat-color($dtlipstick, 500),
+    devfeteam-cloudy-blue: mat-color($dtcloudy-blue, 500),
+    devfeteam-dark-grey: mat-color($dtdark-grey, 500),
+    devfeteam-pale-lilac: mat-color($dtpale-lilac, 500),
+    devfeteam-blue-grey: mat-color($dtblue-grey, 500),
+    devfeteam-pale-purple: mat-color($dtpale-purple, 500),
+    devfeteam-very-light-blue: mat-color($dtvery-light-blue, 500),
+    devfeteam-very-light-grey: mat-color($dtvery-light-grey, 500),
+    devfeteam-pale-grey: mat-color($dtpale-grey, 500),
+    devfeteam-dark-mint-green: mat-color($dtdark-mint-green, 500),
+    devfeteam-very-light-pink: mat-color($dtvery-light-pink, 500),
+    devfeteam-blush: mat-color($dtblush, 500),
+    devfeteam-pale-aqua: mat-color($dtpale-aqua, 500),
+    devfeteam-mango: mat-color($dtmango, 500),
+);
+
+// Define the primary, accent and warn palettes
+$devfeteam-theme-default-primary-palette: mat-palette($dtwhite, 500);
+$devfeteam-theme-default-accent-palette: mat-palette($dtazure, 500);
+$devfeteam-theme-default-warn-palette: mat-palette($dtred-orange, 500);
+
+// -----------------------------------------------------------------------------------------------------
+// @ Default Theme
+// -----------------------------------------------------------------------------------------------------
+
+$devfeteam-theme-default: mat-light-theme($devfeteam-theme-default-primary-palette, $devfeteam-theme-default-accent-palette, $devfeteam-theme-default-warn-palette);
+$devfeteam-theme-default: map-merge($devfeteam-theme-default, $devfeteam-custom-colors);
+ 
+body.theme-devfeteam-default {
+
+    // Generate the Angular Material theme
+    @include angular-material-theme($devfeteam-theme-default);
+
+    // Apply the theme to the Fuse Core
+    @include fuse-core-theme($devfeteam-theme-default);
+
+    // Apply the theme to the user components
+    @include components-theme($devfeteam-theme-default);
+
+    // Generate Fuse color classes for primary, accent and warn colors
+    $palettes: (
+        primary: $devfeteam-theme-default-primary-palette,
+        accent: $devfeteam-theme-default-accent-palette,
+        warn: $devfeteam-theme-default-warn-palette
+    );
+
+    // Set default font family based on the mat-typography-config defined earlier in this file
+    font-family: mat-font-family($typography);
+}
+
+// -----------------------------------------------------------------------------------------------------
+// @ Dark Theme
+// -----------------------------------------------------------------------------------------------------
+
+$devfeteam-theme-dark-primary-palette: mat-palette($mat-grey, 400);
+$devfeteam-theme: mat-dark-theme($devfeteam-theme-default-primary-palette, $devfeteam-theme-default-accent-palette, $devfeteam-theme-default-warn-palette);
+$devfeteam-theme: map-merge($devfeteam-theme, $devfeteam-custom-colors);
+
+body.theme-devfeteam-dark {
+
+    // Generate the Angular Material theme
+    @include angular-material-theme($devfeteam-theme);
+
+    // Apply the theme to the user components
+    @include components-theme($devfeteam-theme);
+
+    // Generate color classes for primary, accent and warn colors
+    $palettes: (
+        primary: $devfeteam-theme-default-primary-palette,
+        accent: $devfeteam-theme-default-accent-palette,
+        warn: $devfeteam-theme-default-warn-palette
+    );
+
+    @include fuse-color-classes($palettes);
+
+    // Set default font family based on the mat-typography-config defined earlier in this file
+    font-family: mat-font-family($typography);
+}
+
+// --- End theme-devfeteam-dark custom theme definition ---

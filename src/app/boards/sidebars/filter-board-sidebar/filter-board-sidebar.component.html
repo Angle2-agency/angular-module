@@ -1,0 +1,31 @@
+<div id="sidebar" fxLayout="column" fxLayoutGap="24px">
+
+    <!-- FORM -->
+    <form>
+
+        <!-- CONTENT -->
+        <div id="content" fxLayout="column" cdkScrollable>
+            <div>
+                <!-- [showChips]="false" -->
+                <lib-facility-search [placeholder]="'SELECT-FACILITY' | translate" [singleSearch]="false"  (facilityRemoved)="facilityRemoved($event)" (facilitySelected)="facilitySelected($event)" fxFlex="304px"></lib-facility-search>
+            </div>
+        </div>
+        <!-- CONTENT -->
+
+        <!-- ACTION BUTTONS -->
+           
+        <div fxLayout="row" fxLayoutAlign="start baseline" id="action-buttons"  >
+            <button fxFlex="120px" (click)="clearAll()" type="submit" class="btn" id="clear-btn" mat-raised-button color="primary">
+                <span class="Body-01-Left-Blue">{{'CLEAR-ALL' | translate }}</span>
+            </button>
+            <button fxFlex="120px" (click)="showResult()" type="submit" class="btn" id="add-btn" mat-raised-button color="accent">
+                <span class="Body-01-Left-White">{{'SHOW-RESULT' | translate }}</span>
+            </button>
+        </div>
+
+        <!-- / ACTION BUTTONS -->
+     
+        </form>
+    <!--/ FORM -->
+
+</div>

@@ -1,0 +1,38 @@
+<div class="content-layout" fxLayout="column">
+    
+    <!-- SEARCH HEADER -->
+    <board-configuration-header
+        (addBoardEvent)="addBoard()"
+        (showDeletedEvent)="showDeleted($event)"
+        (searchOutput)="searchValue = $event"
+        (filterClickEvent)="filterClick()"
+        (facilityIdsChangeEvent)="facilityIdsChange($event)"
+        [facilityIdsSet]="facilityIds"
+    ></board-configuration-header>
+    <!-- SEARCH HEADER -->
+    <!-- BODY -->
+    <div class="body-container">
+        <div *ngIf="gettingBoards" fxLayout="row wrap" fxLayout.xs="column" fxLayoutGap="24px">
+            <ng-container>
+                <card-skeleton></card-skeleton>
+            </ng-container>
+        </div>
+        <div *ngIf="!gettingBoards && (boards && boards.length > 0)" 
+         fxLayout="row wrap" fxLayout.xs="column" fxLayoutGap="24px">
+            <ng-container *ngFor="let data of boards | LockFilter: searchValue; let i = index">
+                <board-configuration-card [data]="data" [style.display]="'flex'"
+                (openEditSideBarEvent)="openEditSideBar($event)"
+                (openDeleteSideBarEvent)="openDeleteSideBar($event)"
+                (selectBoardEvent)="selectBoard($event)">
+                </board-configuration-card>
+            </ng-container>
+        </div>
+        <div *ngIf="!gettingBoards && (boards && boards.length === 0)" 
+        class="no-boards" fxLayout="column" fxLayoutGap="16px" fxLayoutAlign="center center">
+            <mat-icon class="empty-board" svgIcon="empty-board"></mat-icon>
+            <span class="Body-01-Left-DarkGrey no-display-span-padding">{{ 'NO-BOARDS' | translate }}</span>
+        </div>
+    </div>
+    <!-- BODY -->
+    
+</div>

@@ -1,0 +1,85 @@
+<div id="sidebar" fxLayout="column" fxLayoutGap="24px" *ngIf="addBoardForm">
+
+    <!-- FORM -->
+    <form name="addBoardForm" [formGroup]="addBoardForm" autocomplete="off" fxLayout="column" fxFlex="100%"
+        fxLayoutAlign="space-between">
+
+        <!-- CONTENT -->
+        <div id="content" fxLayout="column" cdkScrollable>
+            <div class="imgs-list-wrap" fxFlex="140px">
+                <div *ngIf="!imgIndex" (click)="showImgsList = !showImgsList" class="rectangle">
+                    <mat-icon class="rectangle-icon" svgIcon="picture"></mat-icon>
+                </div>
+                <div *ngIf="imgIndex" (click)="showImgsList = !showImgsList" class="imgs-icon-wrap">
+                    <mat-icon class="imgs-icon" [svgIcon]="imageIndexSVG[imgIndex]"></mat-icon>
+                </div>
+
+                <div fxLayout="column" class="imgs-list" *ngIf="showImgsList">
+                    <div  fxLayout="row">
+                    <div (click)="selectImgsIndex(1)" class="imgs-icon-wrap">
+                        <mat-icon class="imgs-icon" svgIcon="generic-board"></mat-icon>
+                        </div>
+                        <div (click)="selectImgsIndex(2)" class="imgs-icon-wrap">
+                        <mat-icon class="imgs-icon" svgIcon="front-desk-board"></mat-icon>
+                    </div>
+                    </div>
+                    <div  fxLayout="row">
+                    <div (click)="selectImgsIndex(3)" class="imgs-icon-wrap">
+                        <mat-icon class="imgs-icon" svgIcon="nurse-board"></mat-icon>
+                    </div>
+                    <div (click)="selectImgsIndex(4)" class="imgs-icon-wrap">
+                        <mat-icon class="imgs-icon" svgIcon="doctor-board"></mat-icon>
+                    </div>
+                </div>
+                </div>
+            </div>
+            <form fxLayout="column" name="addBoardForm" [formGroup]="addBoardForm" *ngIf="addBoardForm">
+                <div fxLayout="row" fxFlex="70px" fxLayoutAlign="start baseline">
+                    <mat-form-field fxFlex="320px" color="accent" appearance="outline">
+                        <mat-label>{{'BOARD-NAME' | translate}}</mat-label>
+                        <input matInput #name formControlName="name" placeholder="{{'BOARD-NAME' | translate }}"
+                            required>
+                    </mat-form-field>
+                </div>
+                <div fxLayout="row" fxFlex="130px" fxLayoutAlign="start baseline">
+                    <mat-form-field color="accent" fxFlex="320px" appearance="outline">
+                        <mat-label>{{'DESCRIPTION' | translate}}</mat-label>
+                        <textarea matInput formControlName="description" class="textarea"
+                        placeholder="{{'DESCRIPTION' | translate }}"></textarea>
+                    </mat-form-field>
+                </div>
+            </form>
+
+            <div>
+                <lib-facility-search [placeholder]="'SELECT-FACILITY' | translate" [singleSearch]="false"  (facilityRemoved)="facilityRemoved($event)" (facilitySelected)="facilitySelected($event)" fxFlex="304px"></lib-facility-search>
+            </div>
+            <div fxLayout="row" fxFlex="140px" fxLayoutAlign="start baseline">
+                <div fxFlex="320px" class="Caption-01-Left-Grey">
+                    If a facility is not selected, then the board will be available for all facilities
+                </div>
+            </div>
+        </div>
+        <!-- CONTENT -->
+
+        <!-- ACTION BUTTONS -->
+        <div *ngIf="!editFlag" fxLayout="row" class="action-buttons">
+            <button [disabled]="!isValidForm || isAddingBoard" type="submit" class="add-btn" mat-raised-button color="accent" (click)="createBoard()">
+                <span class="Body-01-Left-White">
+                    {{isAddingBoard ? ('ADDING'  | translate) : ('ADD-BOARD' | translate)}}
+                </span>
+            </button>
+        </div>
+        <!-- / ACTION BUTTONS -->
+        <!-- ACTION BUTTONS -->
+        <div *ngIf="editFlag" fxLayout="row" class="action-buttons">
+            <button [disabled]="!isValidForm || !addBoardForm.dirty || isSavingBoard" type="submit" class="add-btn" mat-raised-button color="accent" (click)="editBoard()">
+                <span class="Body-01-Left-White">
+                    {{isSavingBoard ? ('SAVING-CHANGES'  | translate) : ('SAVE-CHANGES' | translate)}}
+                </span>
+            </button>
+        </div>
+        <!-- / ACTION BUTTONS -->
+    </form>
+    <!--/ FORM -->
+
+</div>

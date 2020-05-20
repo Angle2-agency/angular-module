@@ -1,0 +1,67 @@
+<div *ngIf="!gettingBoards && (boards && boards.length === 0)" fxLayout="column" fxLayoutAlign="start center" class="no-boards">
+    <mat-icon class="empty-board" svgIcon="empty-board"></mat-icon>
+    <span class="Body-01-Left-DarkGrey no-display-span-padding">{{ 'NO-BOARDS-TO-SEND' | translate }}</span>
+</div>
+
+<div class="content-layout" fxLayout="column" *ngIf="!gettingBoards && (boards && boards.length > 0)">
+
+    <div fxLayout="column" class="board-container" [ngClass]="{'expand-bottom-padding': boardSelected}">
+
+        <!-- TITLE -->
+        <div fxLayout="row" fxLayoutAlign="center">
+            <span class="Title-1-01-Left-Black">{{ 'SELECT-BOARD' | translate }}</span>
+        </div>
+        <!-- TITLE -->
+    
+        <!-- BOARDS -->
+        <div fxLayout="row wrap" class="pt-40" fxLayoutGap="32px" fxLayoutAlign="center">
+            <div fxLayout="column" class="boards" *ngFor="let board of boards">
+                
+                <div class="board-box pointer" [ngClass]="{ 'selected-board-box': board.selected }"
+                    fxLayout="column" (click)="selectBoard(board)">
+
+                    <mat-icon class="board-icon" [ngClass]="{'selected-board-icon': board.selected}" svgIcon="{{ getSvgIcon(board) }}"></mat-icon>
+
+                    <div fxLayout="row" class="pt-16" fxLayoutAlign="center">
+                        <span [ngClass]="{  'Subheading-1-01-Left-Black': !board.selected, 
+                                            'Subheading-1-01-Left-Blue' : board.selected }">
+                            {{ board.name }}
+                        </span>
+                    </div>                    
+                </div>
+            </div>
+        </div>
+        <!-- BOARDS -->
+
+        <!-- ASSIGN FIELD -->
+        <div *ngIf="boardSelected" fxLayout="row" class="assign-div-padding" 
+            fxLayoutAlign="center" fxLayoutGap="66px">
+
+            <div class="assign-label-padding">
+                <span class="Body-01-Left-Black">{{ 'ASSIGN-TO' | translate }}</span>
+            </div>
+
+            <div>
+                <lib-search-user
+                    [userSearchControl]="userSearchControl"
+                    [singleSearch]="true"
+                    [organizationId]="organizationId"
+                    fxFlex="320px">
+                </lib-search-user>
+            </div>
+
+        </div>
+        <!-- ASSIGN FIELD -->
+
+        <!-- BUTTON PADDING -->
+        <div *ngIf="boardSelected" fxLayout="row" class="button-div-padding" fxLayoutAlign="center">
+            <button mat-raised-button color="accent" class="send-button-btn" (click)="sendPatientToBoard()" [disabled]="sendingToBoard && readingPatient ">
+                <span class="Body-01-Left-White">{{ 'SEND-TO-BOARD' | translate }}</span>
+            </button>
+        </div>
+        <!-- BUTTON PADDING -->
+    
+    </div>
+
+</div>
+

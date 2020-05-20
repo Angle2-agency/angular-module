@@ -1,0 +1,107 @@
+.content-layout {
+    padding: 22px 30px 22px 30px;
+    height: calc(100vh - 20px);
+    overflow: hidden;
+}
+
+.no-content {
+    padding-top: 113px;
+
+    mat-icon {
+
+        min-width: 111px !important;
+        min-height: 126px !important;
+        
+        svg {
+            width: 111px;
+            height: 126px;
+        }
+    }
+}
+
+.body-container {
+    height: 100%;
+    overflow: auto;
+}
+
+.column-view {
+    padding: 2px;
+    height: calc(100vh - 155px);
+}
+
+.height-with-cards {
+    height: fit-content !important;
+    min-height: 100%;
+}
+
+.empty-board {
+    width: 109px !important;
+    height: 125px !important;
+}
+
+.list-columns {
+    width: 240px;
+    height: 100%;
+    border-radius: 4px;
+    box-shadow: 0 1px 4px 0 rgba(0, 25, 94, 0.2);
+    background-color: var(--white);
+    margin-right: 16px;
+}
+
+.transition-column {
+    background-color: var(--pale-grey) !important;
+}
+
+.sticky-header {
+    position: sticky !important;
+    top: -2px !important;
+    z-index: 1 !important;
+    background-color: var(--white) !important;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+}
+
+.sticky-header-transition {
+    background-color: var(--pale-grey) !important;
+}
+
+.card-column-padding {
+    padding-top: 7px;
+    height: 100%;
+}
+
+.dnd-container {
+    height: 100%;
+    width: 100%;
+}
+
+.smooth-dnd-container {
+    height: 100% !important;
+    width: 100% !important;
+}
+
+.smooth-dnd-container.vertical > .smooth-dnd-draggable-wrapper {
+    display: flex !important;
+}
+
+.no-results {
+    width: 80px !important;
+    height: 80px !important;
+    object-fit: contain !important;
+}
+
+.no-results-padding {
+    padding-top: 113px;
+}
+
+.no-results-span-padding {
+    padding-top: 18px;
+}
+
+.no-boards {
+    padding-top: 178px;
+}
+
+.no-display-span-padding {
+    padding-top: 22px;
+}

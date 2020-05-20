@@ -1,0 +1,154 @@
+<div id="viewsidebar" fxLayout="column" *ngIf="card">
+
+    <!-- ACTION BUTTONS -->
+    <div id="action-buttons" fxLayout="row" fxLayoutGap="24px" class="pt-24">
+        <button mat-raised-button color="primary" class="btn-demographics" (click)="openDemographicsHome()" [disabled]="readingPatient">
+            <mat-icon svgIcon="demographics" class="demographics-icon"></mat-icon>
+            <span class="Body-01-Left-Blue demo-label-lineheight">{{ 'PATIENT-DEMOGRAPHICS' | translate }}</span>
+        </button>
+    </div>
+    <!-- / ACTION BUTTONS -->
+
+    <!-- SIDEBAR-CONTENT -->
+    <div class="container" fxLayout="column" fxFlex="100%">
+        <div class="view-content" fxLayout="column" fxLayoutGap="18px">
+
+            <!-- CARD DETAILS -->
+            <div fxLayout="column" class="pb-28">
+
+                <!-- RECORD (EL API AHORA MISMO NO TIENE PROPIEDAD PARA ESTO) -->
+                <!-- <div fxLayout="row" *ngIf="card.patient.recordNumber" class="detail-items">
+                    <div fxLayoutAlign="start start" fxFlex="152px">
+                        <span class="Caption-01-Left-Grey">{{ 'RECORD' | translate }}</span>
+                    </div> 
+                    <div fxLayoutAlign="start start" fxFlex>
+                        <span class="Caption-01-Left-Black">{{ card.patient.recordNumber }}</span>
+                    </div>
+                </div> -->
+                <!-- RECORD -->
+
+                <!-- PHONE -->
+                <div fxLayout="row" class="detail-items" *ngIf="phone">
+                    <div fxLayoutAlign="start start" fxFlex="152px">
+                        <span class="Caption-01-Left-Grey">{{ 'PHONE-NUMBER' | translate }}</span>
+                    </div>
+                    <div fxLayoutAlign="start start" fxFlex>
+                        <span class="Caption-01-Left-Black">{{ phone }}</span>
+                    </div>
+                </div>
+                <!-- PHONE -->
+
+                <!-- COLUMN -->
+                <div fxLayout="row" *ngIf="columnName" class="detail-items">
+                    <div fxLayoutAlign="start start" fxFlex="152px">
+                        <span class="Caption-01-Left-Grey">{{ 'COLUMN' | translate }}</span>
+                    </div>
+                    <div fxLayoutAlign="start start" fxFlex>
+                        <span class="Caption-01-Left-Black">{{ columnName }}</span>
+                    </div>
+                </div>
+                <!-- STATUS -->
+
+                <!-- TURN NUMBER -->
+                <div fxLayout="row" *ngIf="card.turn" class="detail-items">
+                    <div fxLayoutAlign="start start" fxFlex="152px">
+                        <span class="Caption-01-Left-Grey">{{ 'TURN-NUMBER' | translate }}</span>
+                    </div>
+                    <div fxLayoutAlign="start start" fxFlex>
+                        <span class="Caption-01-Left-Black">{{ card.turn }}</span>
+                    </div>
+                </div>
+                <!-- TURN NUMBER -->
+
+                <!-- CREATED -->
+                <div fxLayout="row" *ngIf="card.created" class="detail-items">
+                    <div fxLayoutAlign="start start" fxFlex="152px">
+                        <span class="Caption-01-Left-Grey">{{ 'CREATED' | translate }}</span>
+                    </div>
+                    <div fxLayoutAlign="start start" fxFlex>
+                        <span class="Caption-01-Left-Black">{{ getFormattedDate(card.created) }}</span>
+                    </div>
+                </div>
+                <!-- CREATED -->
+
+                <!-- MODIFIED -->
+                <div fxLayout="row" *ngIf="card.modified" class="detail-items">
+                    <div fxLayoutAlign="start start" fxFlex="152px">
+                        <span class="Caption-01-Left-Grey">{{ 'MODIFIED' | translate }}</span>
+                    </div>
+                    <div fxLayoutAlign="start start" fxFlex>
+                        <span class="Caption-01-Left-Black">{{ getFormattedDate(card.modified) }}</span>
+                    </div>
+                </div>
+                <!-- MODIFIED -->
+
+                <!-- PROVIDER -->
+                <div fxLayout="row" class="detail-items" *ngIf="providerName">
+                    <div fxLayoutAlign="start start" fxFlex="152px">
+                        <span class="Caption-01-Left-Grey">{{ 'PROVIDER' | translate }}</span>
+                    </div>
+                    <div fxLayoutAlign="start start" fxFlex>
+                        <span class="Caption-01-Left-Black">{{ providerName }}</span>
+                    </div>
+                </div>
+                <!-- PROVIDER -->
+
+                <!-- ASSIGNEE -->
+                <div fxLayout="row" class="detail-items" *ngIf="assignee">
+                    <div fxLayoutAlign="start start" fxFlex="152px">
+                        <span class="Caption-01-Left-Grey">{{ 'ASSIGNEE' | translate }}</span>
+                    </div>
+                    <div fxLayoutAlign="start start" fxFlex>
+                        <span class="Caption-01-Left-Black">{{ assignee }}</span>
+                    </div>
+                </div>
+                <!-- ASSIGNEE -->
+
+                 <!-- TAGS -->
+                 <div fxLayout="row" class="detail-items" *ngIf="tags">
+                    <div fxLayoutAlign="start start" fxFlex="152px">
+                        <span class="Caption-01-Left-Grey">{{ 'TAGS' | translate }}</span>
+                    </div>
+                    <div fxLayoutAlign="start start" fxFlex>
+                        <span class="Caption-01-Left-Black">{{ tags }}</span>
+                    </div>
+                </div>
+                <!-- TAGS -->
+
+            </div>
+            <!-- CARD DETAILS -->
+
+            <!-- COMMENTS -->
+            <div fxLayout="column" class="ml-4" *ngIf="card.notes && card.notes.length > 0">
+                <mat-expansion-panel [expanded]="true">
+                    <mat-expansion-panel-header fxLayout="row-reverse" collapsedHeight="48px" expandedHeight="48px">
+
+                        <mat-panel-title class="Body-01-Left-Black ml-8">
+                            <span>{{ 'COMMENTS' | translate }}</span>
+                        </mat-panel-title>
+
+                    </mat-expansion-panel-header>
+
+                    <mat-panel-description>
+                        <div fxLayout="column">
+                            <div fxLayout="row">
+                                <lib-comment-section 
+                                    addNoteCommand="AddCardNote" 
+                                    updateNoteCommand="UpdateCardNote"
+                                    deleteNoteCommand="DeleteCardNote"
+                                    fxFlex="512px" 
+                                    [comments]="card.notes"
+                                    [requestProperties]="requestProperties">
+                                </lib-comment-section>
+                            </div>
+                        </div>
+                    </mat-panel-description>
+                </mat-expansion-panel>
+            </div>
+            <!-- COMMENTS -->
+
+        </div>
+    </div>
+    <!-- /SIDEBAR-CONTENT -->
+
+</div>

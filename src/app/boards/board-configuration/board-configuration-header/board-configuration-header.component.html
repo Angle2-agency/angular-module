@@ -1,0 +1,51 @@
+<div fxLayout="column" fxLayoutGap.xs="18px">
+    
+    <div fxLayout="row" fxLayout.xs="column" fxLayoutGap.xs="18px" fxLayoutAlign.gt-xs="space-between start">
+    
+        <div class="w-100-p" fxLayout="row" fxLayout.xs="column" fxLayoutGap.gt-xs="10px">
+
+            <!--SEARCH-BOX-->          
+            <lib-search-field fxFlex.xs="100" fxFlex="288px" [searchControl]="searchControl" [placeholder]="'SEARCH-FOR-BOARDS' | translate"></lib-search-field>
+            <!--SEARCH-BOX-->
+            
+            <!--ICON-BUTTONS-->
+            <div fxLayout="row" fxLayoutAlign.xs="center center">
+                <button (click)="filterClick()" mat-icon-button>
+                    <mat-icon role="img" aria-hidden="true"
+                        svgIcon="filter" matTooltip="Filters">
+                    </mat-icon> 
+                </button>
+            </div>    
+            <div fxLayout="row" fxLayoutAlign.xs="center center">
+                <div class="slider">
+                    <mat-slide-toggle [checked]="showDeleted"  (change)="showDeletedChanged($event)">{{'SHOW-DELETED' | translate}}</mat-slide-toggle>
+                </div>
+            </div>
+
+
+            <!--ICON-BUTTONS-->
+        </div>
+                  
+        <!-- ACTION BUTTONS -->
+        <div fxLayout="row" fxLayoutAlign="end end" fxLayoutAlign.xs="center center" fxLayoutGap="16px">
+            <button (click)="addBoard()" mat-raised-button color="accent">
+                <span class="Body-01-Left-White">{{'ADD-BOARD' | translate}}</span>
+            </button>
+        </div>
+        <!-- / ACTION BUTTONS -->
+
+    </div>
+
+    <!-- SELECTED FILTERS -->
+    <div class="mb-16" *ngIf="facilities && facilities.length > 0">
+        <mat-chip-list>
+            <div *ngFor="let item of facilities;let i = index">
+                <mat-chip [selectable]="'false'" [removable]="'true'" (removed)="removeChip(i)">
+                    <span class="Caption-01-Left-Black truncate">{{item.name}}</span>
+                    <mat-icon matChipRemove svgIcon="close"></mat-icon>               
+                </mat-chip>
+            </div>            
+        </mat-chip-list>
+    </div>
+    <!-- / SELECTED FILTERS-->
+</div>

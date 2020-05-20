@@ -1,0 +1,29 @@
+<div fxLayout="column">
+
+    <div id="dialog-close" fxLayout="row" fxLayoutAlign="end">
+        <button mat-icon-button aria-label="Close Dialog" (click)="close()">
+            <mat-icon>close</mat-icon>
+        </button>
+    </div>
+
+    <div id="dialog-body" fxLayout="column" fxLayoutAlign="start center">
+        <div id="dialog-header">
+            <span class="Title-02-Center-Black">{{'DO-YOU-WANT-TO-DELETE-BOARD' | translate}}</span>
+        </div>
+        <div id="dialog-content" fxLayout="row" fxLayoutAlign="center center" style="width: 100%;">
+            <p class="Title-01-Center-Black">
+                {{data.name}}
+            </p>
+        </div>
+    </div>
+
+    <div id="dialog-buttons" fxLayoutAlign="center center" fxLayoutGap="24px">
+        <button mat-raised-button (click)="close()">
+            <span class="Body-01-Left-Blue">{{'NO' | translate}}</span>
+        </button>
+        <button mat-raised-button color="accent" (click)="delete()">
+            {{'YES' | translate}}
+        </button>
+    </div>
+
+</div>

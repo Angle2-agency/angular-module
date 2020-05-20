@@ -1,0 +1,78 @@
+.card {
+    width: 224px;
+    min-height: 103px;
+    border-radius: 4px;
+    box-shadow: 0 1px 4px 0 rgba(0, 25, 94, 0.2);
+    background-color: var(--white);
+    margin-bottom: 6px;
+    margin-top: 1px;
+    cursor: move;
+}
+
+.column-content-no-tags-padding {
+    padding-left: 8px !important;
+}
+
+.left-side-tag {
+    width: 4px;
+    flex: 1;
+}
+
+.collapsed-card {
+    height: 56px !important;
+    min-height: 56px !important;
+}
+
+.arrow-size {
+    min-width: 16px !important;
+    min-height: 16px !important;
+    width: 16px !important;
+    height: 16px !important;
+}
+
+.time-icon {
+    min-width: 13px !important;
+    min-height: 13px !important;
+    width: 13px !important;
+    height: 13px !important;
+    line-height: 11px;
+}
+
+.info-icon {
+    min-width: 13px !important;
+    min-height: 13px !important;
+    width: 13px !important;
+    height: 13px !important;
+    line-height: 11px;
+}
+
+.card-info-padding {
+    padding-left: 24px;
+}
+
+.time-span-padding {
+    padding-left: 4px;
+    padding-top: 2px;
+}
+
+.patient-name-padding {
+    padding-top: 4px;
+    padding-left: 4px;
+}
+
+.avatar-padding {
+    padding-top: 6px;
+}
+
+.arrow-padding {
+    padding-top: 2px;
+}
+
+.tag-div-height {
+    height: -webkit-fill-available;
+}
+
+.highlight-text {
+    background: yellow !important;
+    font-weight: bold !important;
+}

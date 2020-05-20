@@ -1,0 +1,51 @@
+
+
+<div class="content-layout" fxLayout="column">
+  <div class="column-header" fxLayout="column" fxLayoutGap.xs="18px">
+    
+    <div fxLayout="row" fxLayout.xs="column" fxLayoutGap.xs="18px" fxLayoutAlign.gt-xs="space-between start">
+    
+        <div class="w-100-p" fxLayout="row" fxLayout.xs="column" fxLayoutGap.gt-xs="10px">
+
+        </div>
+                  
+        <!-- ACTION BUTTONS -->
+        <div fxLayout="row" fxLayoutAlign="end end" fxLayoutAlign.xs="center center" fxLayoutGap="16px">
+            <button (click)="addColumn()" mat-raised-button color="accent">
+                <span class="Body-01-Left-White">{{'ADD-COLUMN' | translate}}</span>
+            </button>
+        </div>
+        <!-- / ACTION BUTTONS -->
+
+    </div>
+
+
+</div>
+
+  <!-- BODY -->
+  <div class="body-container">
+      <div *ngIf="(columns && columns.length > 0)" fxLayout="row wrap" fxLayout.xs="column" fxLayoutGap="24px">
+            <smooth-dnd-container [orientation]="'horizontal'" (drop)="onDrop($event)" 
+            [dragHandleSelector]="'.column-drag-handle'">            
+              <smooth-dnd-draggable *ngFor="let column of columns; let i = index">
+                <columns-configuration-card [data]="column" [style.display]="'flex'" 
+                [editColumnIndex]="editColumnIndex"
+                [indexSet]="i"
+                (saveColumnEvent)="saveColumn($event)"
+                (cancelColumnEvent)="cancelColumn($event, i)"
+                (editColumnEvent)="editColumn(i)"
+                (deleteColumnEvent)="deleteColumn($event)">
+                </columns-configuration-card>
+              </smooth-dnd-draggable>
+            </smooth-dnd-container>
+      </div>
+
+      <div *ngIf="(columns && columns.length === 0)" 
+      class="no-boards" fxLayout="column" fxLayoutGap="16px" fxLayoutAlign="center center">
+          <mat-icon class="empty-board" svgIcon="empty-board"></mat-icon>
+          <span class="Body-01-Left-DarkGrey no-display-span-padding">{{board.name}} {{ 'NO-COLUMNS' | translate }} <a class="add-one-link" (click)="addColumn()">{{ 'ADD-ONE'  | translate }}</a></span>
+      </div>
+  </div>
+  <!-- BODY -->
+  
+</div>

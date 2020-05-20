@@ -1,0 +1,84 @@
+<div class="content-layout" fxLayout="column">
+    
+    <!-- SEARCH HEADER -->
+    <board-header
+        *ngIf="boards && boards.length > 0"
+        (expandCollapseAll)="expandCollapseAll($event)"
+        (changeBoard)="changeBoard($event)"
+        [searchControl]="searchControl"
+        [selectedBoard]="selectedBoard"
+        [boards]="boards"
+        [apiInProcess]="apiInProcess"
+        [cards]="cards"
+        [searchText]="searchText"
+        [searchingCards]="searchingCards"
+        [(cardsColumn)]="cardsColumn">
+    </board-header>
+    <!-- SEARCH HEADER -->
+
+    <!-- BODY -->
+    <div class="body-container">
+        <!-- COLUMNS -->
+        <div *ngIf="(cards && cards.length > 0)" fxLayout="row" class="column-view" [ngClass]="{'height-with-cards': cards && cards.length > 0 }">
+            <div *ngFor="let cardColumn of cardsColumn">
+                <div fxLayout="column" class="list-columns" [ngClass]="{'transition-column' : cardColumn.column.transition}">
+
+                    <!-- COLUMN TITLE -->
+                    <div fxLayout="row" class="sticky-header" [ngClass]="{'sticky-header-transition' : cardColumn.column.transition}">
+                        <span class="Small-01-Left-DarkGrey pl-8 pt-4">{{ cardColumn.column.name | uppercase }}</span>
+                    </div>
+                    <!-- COLUMN TITLE -->
+                
+                    <!-- BOARD CARDS -->
+                    <div fxLayout="row wrap" class="card-column-padding">
+                        <smooth-dnd-container class="dnd-container" [groupName]="'col'" (drop)="onCardDrop(cardColumn.column.columnId, $event)">
+                                <smooth-dnd-draggable *ngFor="let card of cardColumn.cards">
+                                    <card [card]="card" [columns]="columns" [searchText]="searchText" class="pl-8"></card>
+                                </smooth-dnd-draggable>
+                        </smooth-dnd-container>
+                    </div>
+                    <!-- BOARD CARDS -->
+                </div>
+            </div>
+        </div>
+        <!-- COLUMNS -->
+
+        <!-- EMPTY DISPLAY BOARD -->
+        <div *ngIf="(boards && boards.length === 0) && 
+                    !apiInProcess && 
+                    (!searchingCards && !searchText)" 
+                    class="no-boards" fxLayout="column" fxLayoutGap="16px" fxLayoutAlign="center center">
+
+            <mat-icon class="empty-board" svgIcon="empty-board"></mat-icon>
+            <span class="Body-01-Left-DarkGrey no-display-span-padding">{{ 'NO-BOARDS' | translate }}</span>
+        </div>
+        <!-- EMPTY DISPLAY BOARD -->
+
+        <!-- EMPTY DISPLAY CARDS-->
+        <div *ngIf="(boards && boards.length > 0) && 
+                    (cards && cards.length === 0 && !apiInProcess) && 
+                    (!searchingCards && !searchText)" 
+                class="no-content" fxLayout="column" fxLayoutGap="16px" fxLayoutAlign="center center">
+
+            <mat-icon class="empty-board" svgIcon="empty-board"></mat-icon>
+            <span class="Body-01-Left-DarkGrey no-display-span-padding">{{ 'NO-PATIENTS' | translate }}</span>
+        </div>
+        <!-- EMPTY DISPLAY CARDS -->
+
+        <!-- NO RESULT -->
+        <div *ngIf="!apiInProcess && cards.length === 0 && searchText" fxLayout="column" fxLayoutAlign="start center" class="no-results-padding">
+
+            <div fxLayout="row">
+                <mat-icon class="no-results" svgIcon="no-results"></mat-icon>
+            </div>
+
+            <div fxLayout="row" class="no-results-span-padding">
+                <span class="Body-01-Left-Grey">{{ 'NO-MATCH-PATIENT' | translate }}</span>
+            </div>
+        </div>
+        <!-- NO RESULT -->
+
+    </div>
+    <!-- BODY -->
+    
+</div>

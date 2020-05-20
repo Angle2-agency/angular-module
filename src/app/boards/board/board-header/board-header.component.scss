@@ -1,0 +1,86 @@
+board-header {
+
+    mat-icon.add-icon {
+        line-height: 0.85 !important;
+        margin-right: 8px;
+
+        svg {
+            width: 14px;
+            height: 14px;
+    
+            path[fill] {
+                fill: var(--azure);
+            }
+        }
+    }
+
+    .menu-header-btn {
+        min-width: 40px !important;
+        max-width: 40px !important;
+
+        mat-icon.menu-icon {
+            min-width: 4px !important;
+            max-width: 4px !important;
+
+            svg {
+                width: 4px;
+        
+                path[fill] {
+                    fill: var(--black);
+                }
+            }
+        }
+    }
+
+    .mat-chip.mat-standard-chip {
+        margin-right: 12px;
+        width: 102px;
+    }
+    
+    .truncate {
+        flex: 1;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .board-infix {
+
+        margin-right: 32px !important;
+
+        .mat-form-field-appearance-outline .mat-form-field-outline-start {
+            background: var(--white) !important;
+        }
+
+        .mat-form-field-appearance-outline .mat-form-field-outline-end {
+            background: var(--white) !important;
+        }
+
+        .mat-form-field-appearance-outline .mat-form-field-infix {
+            padding: 6px 0 10px 0 !important;
+        }
+
+        .mat-form-field-appearance-outline .mat-form-field-prefix {
+            top: 0.10em !important;
+        }
+    }    
+
+    .board-icon {
+        margin-right: 8px;
+
+        svg {
+            width: 20px !important;
+            height: 16px !important;
+        }
+    }
+
+    .mat-form-field-wrapper {
+        padding-bottom: 14px !important;
+    }
+}
+
+.btn-collapseExpand-size{
+    min-width: 96px;
+    padding-left: 12.5px !important;
+    padding-right: 15.5px !important;
+}

@@ -1,0 +1,109 @@
+<div fxLayout="column" fxLayoutGap.xs="18px">
+    
+    <div fxLayout="row" fxLayout.xs="column" fxLayoutGap.xs="18px" fxLayoutAlign.gt-xs="space-between start">
+
+        <div class="w-100-p" fxLayout="row" fxLayout.xs="column" fxLayoutGap.gt-xs="10px" >
+
+            <!-- BOARD OPTIONS -->
+            <div class="board-infix">
+                <mat-form-field appearance="outline" color="accent" fxFlex="216px">
+
+                    <mat-icon *ngIf="(!selectedBoard.imageIndex) || (selectedBoard.imageIndex === 0 || selectedBoard.imageIndex === 1)" 
+                        matPrefix fxLayoutAlign="start center" class="board-icon" svgIcon="generic-board"></mat-icon>
+
+                    <mat-icon *ngIf="selectedBoard.imageIndex && selectedBoard.imageIndex === 2" 
+                        matPrefix fxLayoutAlign="start center" class="board-icon" svgIcon="front-desk-board"></mat-icon>
+
+                    <mat-icon *ngIf="selectedBoard.imageIndex && selectedBoard.imageIndex === 3" 
+                        matPrefix fxLayoutAlign="start center" class="board-icon" svgIcon="nurse-board"></mat-icon>
+
+                    <mat-icon *ngIf="selectedBoard.imageIndex && selectedBoard.imageIndex === 4" 
+                        matPrefix fxLayoutAlign="start center" class="board-icon" svgIcon="doctor-board"></mat-icon>
+
+                    <mat-select [(ngModel)]=selectedBoard (opened)="matSelectOpened()" [disabled]="apiInProcess">
+                        
+                      <mat-option *ngFor="let board of boards" [value]="board" (onSelectionChange)="setSelectedBoard($event)">
+
+                        <!-- BOARD OPTION AND ICON -->
+                        <div fxLayout="row" fxLayoutGap="8px" fxLayoutAlign="start center">
+
+                            <div fxLayout="column" fxFlex="24px">
+
+                              <mat-icon *ngIf="(!board.imageIndex) || (board.imageIndex === 0 || board.imageIndex === 1)" 
+                                class="h-16 w-20" svgIcon="generic-board"></mat-icon>
+
+                              <mat-icon *ngIf="board.imageIndex && board.imageIndex === 2" 
+                                class="h-16 w-20" svgIcon="front-desk-board"></mat-icon>
+
+                              <mat-icon *ngIf="board.imageIndex && board.imageIndex === 3" 
+                                class="h-16 w-20" svgIcon="nurse-board"></mat-icon>
+
+                              <mat-icon *ngIf="board.imageIndex && board.imageIndex === 4" 
+                                class="h-16 w-20" svgIcon="doctor-board"></mat-icon>
+
+                            </div>
+
+                            <div fxLayout="column" fxFlex>
+                                <span class="Body-01-Left-Black pt-4">{{ board.name }}</span>
+                            </div>
+                        </div>
+                        <!-- BOARD OPTION AND ICON -->
+
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+            </div>
+            <!-- BOARD OPTIONS -->
+
+            <!--SEARCH-BOX-->          
+            <lib-search-field 
+                fxFlex.xs="100" fxFlex="376px" 
+                [searchControl]="searchControl" 
+                placeholder="{{ 'SEARCH' | translate }}"
+                *ngIf="(cards && cards.length > 0) || searchText || (!searchText && searchingCards)">
+            </lib-search-field>
+            <!--SEARCH-BOX-->
+            
+            <!--ICON-BUTTONS-->
+            <div fxLayout="row" fxLayoutAlign.xs="center center">
+                <!-- <button mat-icon-button>
+                    <mat-icon role="img" aria-hidden="true"
+                        svgIcon="filter" matTooltip="Filters">
+                    </mat-icon> 
+                </button> -->
+            </div>     
+            <!--ICON-BUTTONS-->
+        </div>
+                  
+        <!-- ACTION BUTTONS -->
+        <div fxLayout="row" fxLayoutAlign="end end" fxLayoutAlign.xs="start start" fxLayoutGap="16px" class="pt-4">
+
+            <!-- <button mat-raised-button color="primary">
+                <span class="Body-01-Left-Blue">{{ 'END-DAY' | translate }}</span>
+            </button> -->
+
+            <!-- <button mat-raised-button color="primary">
+                <span class="Body-01-Left-Blue">{{ 'GENERATE-REPORT' | translate }}</span>
+            </button> -->
+
+            <button mat-raised-button color="primary" class="btn-collapseExpand-size" (click)="onExpandCollapseAll()" *ngIf="cards && cards.length > 0">
+                <span class="Body-01-Left-Blue">{{ getExpandCollapseText() }}</span>
+            </button>
+
+            <!-- <button mat-raised-button [matMenuTriggerFor]="ellipsisMenu" color="primary" class="menu-header-btn">
+                <mat-icon class="menu-icon" svgIcon="ellipsis"></mat-icon>
+            </button> -->
+        </div>
+        <!-- / ACTION BUTTONS -->
+
+    </div>
+
+    <!-- <mat-menu #ellipsisMenu="matMenu">
+        <button mat-menu-item>
+            <span class="Body-01-Left-Black">Item 1</span>
+        </button>
+        <button mat-menu-item fxLayoutAlign="space-between">                        
+            <span class="Body-01-Left-Black">Item 2</span>
+        </button>
+    </mat-menu> -->
+</div>

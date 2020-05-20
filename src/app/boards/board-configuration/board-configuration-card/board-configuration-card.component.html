@@ -1,0 +1,74 @@
+<div fxLayout="column" class="board-configuration-card" [ngClass]="{ 'expanded-card' : !hideContent }">
+
+    <!-- CARD HEADER -->
+
+    <!-- TITLE -->
+    <div fxLayout="column" class="header-padding">
+
+        <div fxFlex="120px" fxLayout="row" class="actions-buttons-padding">
+            <div fxFlex="170px" class="imgs-padding">
+                <span *ngIf="data.deleted" class="Small-01-Left-Red">{{'DELETED-UPPERCASE' | translate}}</span>
+                <div (click)="selectBoard()" class="imgs-icon-wrap">
+                    <mat-icon *ngIf="data.imageIndex" class="imgs-icon" [svgIcon]="imageIndexSVG[data.imageIndex]"></mat-icon>
+                    <mat-icon *ngIf="!data.imageIndex" class="imgs-icon" svgIcon="deff-board"></mat-icon>
+                 </div>
+            </div>
+            <div *ngIf="!data.deleted" fxLayout="column">
+                <button (click)="openEditSideBar()" mat-icon-button>
+                    <mat-icon svgIcon="edit" class="mat-icon"></mat-icon>
+                </button>
+            </div>
+
+            <div *ngIf="!data.deleted" fxLayout="column">
+                <button (click)="openDeleteSideBar()" mat-icon-button>
+                    <mat-icon svgIcon="delete" class="mat-icon"></mat-icon>
+                </button>
+            </div>
+        </div>
+
+        <div fxFlex="160px" fxLayout="column" class="actions-buttons-padding">
+            <div fxFlex="40px" fxLayout="row" class="Title-01-Left-Black display-margin">
+                {{data.name}}
+            </div>
+            <div fxFlex="40px"  fxLayout="row" class="Caption-01-Left-Grey">
+                {{data.description}}
+            </div>
+            <div fxFlex="30px"  fxLayout="row" class="Caption-01-Left-Grey">
+                {{'FACILITIES' | translate}}
+            </div>
+            <div fxFlex="20px"  fxLayout="row">
+                <div *ngIf="data.facilityIds.length && facilities">
+                    <div *ngIf="data.facilityIds.length <= 3">
+                        <span class="Caption-01-Left-Black" fxLayout="column" *ngFor="let item of data.facilityIds;let i = index">
+                            {{facilities[i].name}}
+                        </span>
+                    </div>
+                    <div class="facilities-details-wrap" fxLayout="column" *ngIf="data.facilityIds.length > 3">
+                        <span class="Caption-01-Left-Black">{{facilities[0].name}}</span>
+                        <span class="Caption-01-Left-Black">{{facilities[1].name}}</span>
+                        <div (mouseenter)="showFacilityIds = true" (mouseleave)="showFacilityIds = false" class="Caption-01-Left-Blue facilities">
+                            {{data.facilityIds.length - 2}} facilities
+                        </div>
+                        <div *ngIf="showFacilityIds" class="facilities-details">
+                            <span class="Caption-01-Left-Black facility" fxLayout="column"
+                             *ngFor="let item of data.facilityIds;let i = index" >
+                                {{facilities[i].name}}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <span *ngIf="!data.facilityIds.length">{{'ALL' | translate}}</span>
+            </div>
+        </div>
+    </div>
+
+
+    <div *ngIf="!hideContent" class="body-padding" [ngClass]="{'body-bottom-padding': (!showNewCardFooter || !showUpdatedCardFooter || !showWorkingCardFooter)}">
+
+
+        <!-- CARD CONTENT -->
+        <div fxLayout="column" class="card-content-margin">
+        </div>
+    </div>
+  
+</div>
